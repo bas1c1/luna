@@ -4,34 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <style>
+        .card{
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(7px);
+        }
+    </style>
     <title>Help</title>
 </head>
 
-<body>
-
-    <body style="background-color: rgb(216, 216, 216); padding: 5%;" align="center">
-        <div
-            style="background-color:rgb(255, 255, 255); height: 60vh; border-radius: 1px; border: 1px solid black; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);">
-            <h1>Project Luna: Control Panel | Help</h1>
-            <div style="text-align: start; padding: 1%; padding-left: 5%; display: flex; flex-direction: column;">
+<body data-bs-theme="dark" style="background: radial-gradient(circle at center,rgb(22, 0, 56), black );">  
+    <main>
+        <div class="card" style="margin: 5%; margin-top: 20vh;">
+            <div class="card-header">
+                Project Luna: Control Panel | Help
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
                 <div><a href="/mine">Mine Block</a> - this link for mining blocks, page not will loaded, but you can close
                     this page or browser or view other page in background while program opened</div>
                 <div><a href='/transactions/new'>New Transaction</a> - this page for create new transaction in network
-                blockchain. In LCC</div>
+                    blockchain. In LCC</div>
                 <div><a href='/chain'>Full Chain</a> - Show full information about chain</div>
                 <div><a href='/nodes/register'>Register Nodes</a> - register node</div>
                 <div><a href='/nodes/resolve'>Resolve Nodes</a> - check valide your chain in network</div>
                 <div><a href="/api">API</a> - docs for api with work this blockchain and network</div>
-            </div>
-            Whith questions on <a href="mailto:projectluna@bk.ru">projectluna@bk.ru</a>
-            <hr>
-            <b>After click on mine you can close browser or page, mining while open programm</b>
-            <div>
-                <a href="/">Back on main</a>
+                <div align="center">
+                    Whith questions on <a href="mailto:projectluna@bk.ru">projectluna@bk.ru</a>
+                </div>
+                <hr>
+                <div align="center">
+                    <b>After click on mine you can close browser or page, mining while open programm</b>
+                </div>
+                <div align="center">
+                    <a style="margin: 5px;" href="/" class="btn btn-primary">Back on main</a>
+                </div>
             </div>
         </div>
-    </body>
-
+    </main>
 </body>
 
 </html>

@@ -9,7 +9,7 @@ class Server
         var settings = ConfigurationManager.AppSettings;
         string host = hoster;
         string port = porter;
-
+        // run server on localhost or localhost:port. Server based on TinyWebServer by tevert
         var server = new TinyWebServer.WebServer(request =>
                 {
                     string path = request.Url.PathAndQuery.ToLower();
@@ -26,8 +26,6 @@ class Server
                     {
                         case "/styles/style.css":
                             return File.ReadAllText("src/html/styles/style.css");
-                        case "/styles/style2.css":
-                            return File.ReadAllText("src/html/styles/style2.css");
                         case "/assets/bootstrap/css/bootstrap.min.css":
                             return File.ReadAllText("src/html/assets/bootstrap/css/bootstrap.min.css");
                         case "assets/bootstrap/js/bootstrap.bundle.js":
@@ -112,7 +110,7 @@ class Server
                 $"http://{host}:{port}/nodes/",
                 $"http://{host}:{port}/balance/",
                 $"http://{host}:{port}/transactions/info/"
-
+                // amazing! :)
             );
 
         server.Run();

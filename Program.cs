@@ -1,9 +1,9 @@
 ﻿Console.WriteLine("Hello ProjectLuna!\nProjectLuna #lunacc - BlockChain for Luna Cosimic Coin.\nThis is program for Mining of Luna Cosimic Coin.\nAll informaiton about this program can be found in readme.md file and on site projectluna.ru");
-var projectluna_reg = @"";
+//hot vars (wars)
 var static_address = @"address.dat";
 var hoster = "";
 var porter = "";
-
+// check if file exist
 if (!File.Exists(@"projectluna.dat"))
 {
     Console.WriteLine("File projectluna.dat not found. Creating...");
@@ -14,7 +14,7 @@ else
 {
     Console.WriteLine("File projectluna.dat found.");
 }
-
+// check if static address exist (address.dat)
 if (!File.Exists(static_address))
 {
     try
@@ -38,18 +38,22 @@ else
     porter = File.ReadAllLines(static_address)[0].Split(':')[1];
     Console.WriteLine("File address.dat found. Content: " + hoster + ":" + porter);
 }
+
+// Please, write your ID, if you don't know it. Program will generate one.
 Console.WriteLine("Write your ID, if your ID is empty, program will generate one.\nID (Not write if you don't know): "); var id = Console.ReadLine();
 var blockchain = new Blockchain();
 if (id != "")
     blockchain.changeNodeID(id);
+//start server
 var server = new Server(blockchain, hoster, porter);
 blockchain.registerNode(@"http://" + hoster + ":" + porter + "/");
 Console.WriteLine("This node registered: http://" + hoster + ":" + porter);
-
+//info about: CLOSE THIS PROGRAM
 Console.ForegroundColor = ConsoleColor.Red;
 Console.WriteLine("Press Ctrl+C for close");
 Console.ForegroundColor = ConsoleColor.White;
 
+// 1 - close this program
 AppDomain app = AppDomain.CurrentDomain;
 app.ProcessExit += delegate
 {
@@ -58,7 +62,7 @@ app.ProcessExit += delegate
     blockchain.nodes.Remove(nodei);
     File.WriteAllText(@"projectluna.dat", blockchain.getFullChain());
 };
-
+// 2 - close this program
 Console.CancelKeyPress += delegate
 {
     node nodei = new node();
@@ -66,7 +70,7 @@ Console.CancelKeyPress += delegate
     blockchain.nodes.Remove(nodei);
     File.WriteAllText(@"projectluna.dat", blockchain.getFullChain());
 };
-
+// 3 while loop for DONT CLOSE THIS PROGRAM, if you want to close this program, please type "Ctrl+C" in console
 for (; ; ) { }
-
-Console.Read();
+// what is this????
+Console.Read(); // >_<

@@ -2,8 +2,8 @@ using Newtonsoft.Json;
 
 public class transaction
 {
-    public coin amount {get;set;}
-    public string NOV { get; set; }
+    public coin amount {get;set;} // count of coins
+    public string NOV { get; set; } // NOV -NAME OF VALUTE (LCC, BTN, RUB, etc.)
     public string description { get; set; } // description of transaction
     public string sender { get; set; } // sender of transaction (user id)
     public string recipient { get; set; } // recipient of transaction (user id)

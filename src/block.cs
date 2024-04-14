@@ -1,7 +1,7 @@
 public class block
 {
-    public int index { get; set; }
-    public int gen { get; set; }
+    public int index { get; set; } // index of the block in the chain, starting from 0, the first block has index 0, the second block has index 1 etc.
+    public int gen { get; set; } // generation number of the block? (gen of chain, for simple check of all blocks in the chain and users get simpled chain for fast download). 
     public string previousHash { get; set; } // hash of the previous block
     public DateTime timestamp { get; set; } // timestamp of the block
     public string hash { get; set; } // hash of the block

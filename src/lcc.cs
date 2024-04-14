@@ -2,10 +2,10 @@ using Newtonsoft.Json;
 
 class lcc
 {
-    private Blockchain luna;
-    public lcc(Blockchain luna) => this.luna = luna;
+    private Blockchain luna; // get luna blockchain
+    public lcc(Blockchain luna) => this.luna = luna; // stupid 
 
-    // get balance of account if was transaction with sender or receiver
+    // get balance of account if was transaction with sender or receiver || this fast method, than in python. lol. it's slow. (logically)
     public float getFastBalance(string id)
     {
         var balance = 0;
@@ -28,7 +28,7 @@ class lcc
         return balance;
     }
 
-    // transaction info
+    // transaction info from id, if was transaction with sender or receiver || this fast method, than in python. lol. it's slow.  (logically)
     public string getInfoTransaction(string id){
         var chain = luna.getFullChain();
         transaction bblock = new transaction();

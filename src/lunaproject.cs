@@ -2,6 +2,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Net;
+using System.ComponentModel;
 class Blockchain
 {
     private List<block> chain = new List<block>();
@@ -11,8 +12,14 @@ class Blockchain
     private coin privateCoin = new coin();
     public string nodeID { get; set; }
     private int difficulty = 1;
+
+    //
+    // Main func
+    //
+    [Description("Main func")]
     public Blockchain()
     {
+        //test certificate
         var certificated = new
         {
             title = "luna",
@@ -20,13 +27,14 @@ class Blockchain
             stamp = "12.04.24",
             bank = "luna.fsf.00.24"
         };
+        // check if certificate exists
         if (File.Exists("luna.cert"))
         {
             privateCoin.name = "LunaCosmicCoin";
             privateCoin.symbol = "LCC";
             privateCoin.count = 1;
             privateCoin.certificate = JsonConvert.DeserializeAnonymousType(File.ReadAllText("luna.cert"), certificated).ToString();
-        }
+        } 
         else
         {
             Console.WriteLine("No certificate found. Create a new one...");
@@ -34,9 +42,10 @@ class Blockchain
         }
 
         Console.WriteLine("Blockchain class created");
-        if (nodeID == null)
+        if (nodeID == null) // if nodeID is not found
             this.nodeID = Guid.NewGuid().ToString().Replace("-", "");
         //Console.WriteLine(nodeID);
+        // create a file with chain if it doesn't exists
         if (File.Exists("projectluna.dat") && File.ReadAllText("projectluna.dat") != "")
         {
             string json = File.ReadAllText("projectluna.dat");
@@ -55,14 +64,20 @@ class Blockchain
         else
         {
             Console.WriteLine("Blockchain not in projectluna.dat and will be created from genesis block");
-            createBlock(proof: 100, previousHash: "1"); // genesis block. First block in the chain. Proof of work...
+            createBlock(proof: 100, previousHash: "1"); // genesis block. First block in the chain.
         }
 
         Console.WriteLine("Your id is: " + nodeID + " your id - wallet, which is connected to the blockchain and node. Save it.");
     }
-
+    //
+    // change nodeID(string _nodeID) - change nodeID.
+    //
+    [Description("Change nodeID")]
     public void changeNodeID(string _nodeID) => nodeID = _nodeID;
-
+    //
+    // createTransaction(string description, string NOV, string sender, string recipient, coin amount) - create new transaction.
+    //
+    [Description("Create new transaction")]
     internal int createTransaction(string description, string NOV, string sender, string recipient, coin amount)
     {
         transaction newTransaction = new transaction();
@@ -75,7 +90,11 @@ class Blockchain
         return lastBlock != null ? lastBlock.index + 1 : 0;
 
     }
-
+    //
+    // public void createBlock(int proof, string previousHash = null) - create new block. 
+    //If there is no previous block, it will be the first block in the chain. This will be the first block in the chain (func main).
+    //
+    [Description("Create new block in chain")]
     private block createBlock(int proof, string previousHash = null)
     {
         block newBlock = new block();
@@ -89,13 +108,19 @@ class Blockchain
         chain.Add(newBlock);
         return newBlock;
     }
-
+    //
+    // private string getHash(block _block) - return the hash of the block.
+    //
+    [Description("Return the hash of the block")]
     private string getHash(block _block)
     {
         string blockText = JsonConvert.SerializeObject(_block);
         return GetSha256(blockText);
     }
-
+    //
+    // private bool validChain(List<block> chain) - check if the chain is valid.
+    //
+    [Description("Check if the chain is valid")]
     private bool validChain(List<block> chain)
     {
         block blocki = new block();
@@ -122,7 +147,10 @@ class Blockchain
 
         return true;
     }
-
+    //
+    // public string GetSha256(string text) - return the hash.
+    //
+    [Description("Return the hash")]
     public string GetSha256(string text)
     {
         using (SHA256 sha256 = SHA256.Create())
@@ -138,7 +166,10 @@ class Blockchain
             return hashBuilder.ToString();
         }
     }
-
+    //
+    // private int createProofOfWork(int lastProof, string previousHash) - return the proof of work.
+    //
+    [Description("Return the proof of work")]
     private int createProofOfWork(int lastProof, string previousHash)
     {
         int proof = 0;
@@ -149,14 +180,20 @@ class Blockchain
         return proof;
 
     }
-
+    //
+    // private bool validProofOfWork(int lastProof, int proof, string previousHash) - check if the proof of work is correct.
+    //
+    [Description("Check if the proof of work is correct")]
     private bool validProofOfWork(int lastProof, int proof, string previousHash)
     {
         string guess = $"{lastProof}{proof}{previousHash}{difficulty}";
         string guessHash = GetSha256(guess);
         return guessHash.StartsWith("0000");
     }
-
+    //
+    // internal string mineBlock() - mine the block. Heh...
+    // 
+    [Description("Mine the block")]
     internal string mineBlock()
     {
         if (!Consensus())
@@ -181,7 +218,10 @@ class Blockchain
         //Console.WriteLine("Check to connect in the internet or check to aviable other nodes");
         return "None";
     }
-
+    //
+    //internal string getFullChain() - return the full chain.
+    //
+    [Description("Return the full chain")]
     internal string getFullChain()
     {
         List<block> copychain = new List<block>();
@@ -194,7 +234,10 @@ class Blockchain
 
         return JsonConvert.SerializeObject(response);
     }
-
+    //
+    // internal string getNodes() - return the nodes.
+    //
+    [Description("Return the nodes")]
     internal string getNodes()
     {
         List<node> copynodes = new List<node>();
@@ -202,11 +245,18 @@ class Blockchain
         var response = new { nodes = copynodes };
         return JsonConvert.SerializeObject(response);
     }
+    //
+    // public registerNode(string address) - register a node.
+    //
+    [Description("Register a node")]
     public void registerNode(string address)
     {
         nodes.Add(new node { uri = new Uri(address) });
     }
-
+    //
+    // public string RegisterNodes(string[] nodes) - register nodes.
+    //
+    [Description("Register nodes")]
     internal string RegisterNodes(string[] nodes)
     {
         var builder = new StringBuilder();
@@ -221,7 +271,10 @@ class Blockchain
         string result = builder.ToString();
         return result.Substring(0, result.Length - 2);
     }
-
+    //
+    // public bool Consensus() - return the consensus.
+    //
+    [Description("Consensus")]
     internal bool Consensus()
     {
         try
@@ -300,7 +353,10 @@ class Blockchain
         }
         return false;
     }
-
+    //
+    // internal string consensus() - return the consensus. OLD FUNCTION.
+    //
+    [Description("Consensus OLD")]
     internal string consensus()
     {
         bool replaced = resolveConflicts();
@@ -315,7 +371,10 @@ class Blockchain
         return JsonConvert.SerializeObject(response);
 
     }
-
+    //
+    //private bool resolveConflicts() - resolve conflicts.
+    //
+    [Description("Resolve conflicts")]
     private bool resolveConflicts()
     {
         List<block> newChain = null;

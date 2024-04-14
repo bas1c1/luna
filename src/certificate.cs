@@ -3,10 +3,10 @@ using System.Security.Cryptography.X509Certificates;
 
 public class certificate
 {
-    public string title { get; set; }
-    public string read { get; set; }
-    public string stamp { get; set; }
-    public string bank { get; set; }
+    public string title { get; set; } // title of the certificate
+    public string read { get; set; } // date of reading the certificate
+    public string stamp { get; set; } // date of signing the certificate
+    public string bank { get; set; } // / name of the bank that issued the certificate / ONLY USED BY LUNA
 
     public override string ToString()
     {
