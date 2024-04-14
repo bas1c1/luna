@@ -1,0 +1,9 @@
+api/
+bin/
+FrostyWallet/
+obj/
+static/
+/address.dat
+/luna.cert
+/projectluna.dat
+/READMY.md

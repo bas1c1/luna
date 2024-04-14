@@ -1,0 +1,135 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+
+html,
+body,
+html * {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #eee;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #151515;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+body {
+    background-color: #151515;
+}
+
+#logo {
+    transform: translateX(-200px);
+    margin-top: 4rem;
+    width: 16rem;
+}
+
+#search {
+    padding: 3px;
+    outline: none;
+    border: none;
+    border-radius: 15px 0 0 15px;
+    background-color: #313131;
+    color: #a3a3a3;
+    font-size: large;
+    width: 60%;
+    height: 4rem;
+}
+
+button {
+    margin-left: -5px;
+    border: none;
+    border-radius: 0 15px 15px 0;
+    color: #eee;
+    height: 4rem;
+    width: 8%;
+    background-color: rgb(197, 79, 0);
+    font-size: large;
+}
+
+footer {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+}
+
+.card {
+    display: block;
+    margin: 5px;
+    
+}
+
+section {
+    margin-top: 15px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+@media (max-width:720px) {
+    #logo {
+        transform: translateX(-0px);
+    }
+
+    .card {
+        margin: 2px;
+        width: 100% !important;
+    }
+
+    main {
+        padding: 5px;
+    }
+
+    section {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    .tabs {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1px;
+    }
+
+    #search {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    button {
+        display: none;
+    }
+}
